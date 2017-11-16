@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CROSS-DOMAIN</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+    <h3 style="padding:5px">Mensagens recebidas:</h3>
+    <div style="padding:15px" id="messages"></div>
+
+    <script language="javascript">
+        function messageUser(response) {
+            
+            /*Pega o elemento "messages"*/
+            var messageContent = document.getElementById("messages");
+
+            /*Seta do Domínio liberado"*/
+            var domain = "http://localhost:3333";
+            var date = new Date();
+            var formartDate = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+            
+            /*Se a Origem for igual ao dominio liberado, então a mensagem é exibida*/
+            if (response.origin == domain){
+                var contentMsg = response.data;
+                messageContent.innerHTML += " <i class='fa fa-commenting-o'></i> Mensagem Recebida @ " + formartDate + ": " + response.data + "<br />";
+            }
+            /*Apresenta mensagem de erro, informando qual a origem*/
+            else
+                messageContent.innerHTML += "Mensagem Recebida erro:" + response.origin + "<br />";
+
+        }
+
+        /*Listener para pegar as mensagens recebidas e chamar a função*/
+        window.addEventListener("message", messageUser, false);
+    </script>
+
+</body>
+</html>
