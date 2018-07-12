@@ -1,5 +1,5 @@
 # cross-domain
-Simples envio de mensagem. Teste de Admissão
+Simples envio de mensagem.
 
 
 <strong>npm install</strong><br>
